@@ -10,7 +10,7 @@ import type {
 } from "@/lib/types";
 
 const api = axios.create({
-  baseURL: "https://blog-website-w34n.vercel.app/api",
+  baseURL: "https://blog-website-tvka.onrender.com/api",
 });
 
 api.interceptors.request.use((config) => {
