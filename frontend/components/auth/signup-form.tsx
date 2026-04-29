@@ -8,6 +8,7 @@ import { toast } from "sonner";
 
 import { signupSchema, type SignupFormValues } from "@/lib/schemas";
 import { signup } from "@/lib/api";
+import { getSignupErrorMessage } from "@/lib/auth-error";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,9 +30,7 @@ export function SignupForm() {
       toast.success("Account created. You can log in now.");
       router.push("/login");
     } catch (error: unknown) {
-      const message =
-        error instanceof Error ? error.message : "Unable to create account. Please try again.";
-      toast.error(message);
+      toast.error(getSignupErrorMessage(error));
     }
   });
 

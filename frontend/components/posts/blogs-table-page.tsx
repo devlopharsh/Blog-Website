@@ -196,7 +196,7 @@ export function BlogsTablePage() {
       cell: ({ row }) => (
         <div className="min-w-[240px]">
           <p className="font-semibold text-foreground">
-            <Link href={`/post/${row.id}`} className="hover:underline">
+            <Link href={`/post/${row.original._id}`} className="hover:underline">
               {row.original.title}
             </Link>
           </p>

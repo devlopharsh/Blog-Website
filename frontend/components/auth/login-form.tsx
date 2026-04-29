@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { loginSchema, type LoginFormValues } from "@/lib/schemas";
 import { login } from "@/lib/api";
 import { setStoredUser, setToken } from "@/lib/auth";
+import { getLoginErrorMessage } from "@/lib/auth-error";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -33,9 +34,7 @@ export function LoginForm({ redirect = "/blogs" }: { redirect?: string }) {
       router.push(redirect);
       router.refresh();
     } catch (error: unknown) {
-      const message =
-        error instanceof Error ? error.message : "Unable to log in. Please try again.";
-      toast.error(message);
+      toast.error(getLoginErrorMessage(error));
     }
   });
 
@@ -44,19 +43,30 @@ export function LoginForm({ redirect = "/blogs" }: { redirect?: string }) {
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input id="email" type="email" {...form.register("email")} />
-        <p className="text-sm text-destructive">{form.formState.errors.email?.message}</p>
+        <p className="text-sm text-destructive">
+          {form.formState.errors.email?.message}
+        </p>
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">Password</Label>
         <Input id="password" type="password" {...form.register("password")} />
-        <p className="text-sm text-destructive">{form.formState.errors.password?.message}</p>
+        <p className="text-sm text-destructive">
+          {form.formState.errors.password?.message}
+        </p>
       </div>
-      <Button className="w-full" type="submit" disabled={form.formState.isSubmitting}>
+      <Button
+        className="w-full"
+        type="submit"
+        disabled={form.formState.isSubmitting}
+      >
         {form.formState.isSubmitting ? "Signing in..." : "Login"}
       </Button>
       <p className="text-center text-sm text-muted-foreground">
         Need an account?{" "}
-        <Link className="font-semibold text-primary hover:text-primary/80" href="/signup">
+        <Link
+          className="font-semibold text-primary hover:text-primary/80"
+          href="/signup"
+        >
           Create one
         </Link>
       </p>
