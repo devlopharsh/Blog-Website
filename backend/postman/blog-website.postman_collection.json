@@ -1,0 +1,188 @@
+{
+  "info": {
+    "_postman_id": "8959566d-4e9e-40cb-9528-582e53daad7e",
+    "name": "Blog Website API",
+    "description": "This collection contains all API endpoints for a Blog Website built using the MERN stack. It includes authentication (signup, login, password reset) and CRUD operations for blog posts. The APIs support user management, secure authentication using JWT, and full lifecycle management of blog content.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39314235"
+  },
+  "item": [
+    {
+      "name": "Get All Blogs",
+      "request": {
+        "method": "GET",
+        "description": "Fetch all blog posts available in the database. This endpoint returns a list of all posts with their details such as title, content, author, and category.",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/posts/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "posts", ""]
+        }
+      }
+    },
+    {
+      "name": "Get Specific Post",
+      "request": {
+        "method": "GET",
+        "description": "Retrieve a single blog post using its unique ID. Useful for viewing full details of a specific post.",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/posts/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "posts", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Create Post",
+      "request": {
+        "method": "POST",
+        "description": "Create a new blog post. Requires title, content, author, and category. Typically used by authenticated users.",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Getting Started with MERN Stack\",\n  \"content\": \"This post explains how to build a full-stack app using MongoDB, Express, React, and Node.js.\",\n  \"author\": \"Harsh Kumar\",\n  \"category\": \"Technology\"\n}",
+          "options": {
+            "raw": { "language": "json" }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/posts/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "posts", ""]
+        }
+      }
+    },
+    {
+      "name": "Update Post",
+      "request": {
+        "method": "PUT",
+        "description": "Update an existing blog post using its ID. Only modified fields (e.g., title or content) need to be sent in the request body.",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Advanced MERN Stack Guide\",\n  \"content\": \"This updated post covers advanced concepts like authentication and scaling.\"\n}",
+          "options": {
+            "raw": { "language": "json" }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/posts/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "posts", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Delete Post",
+      "request": {
+        "method": "DELETE",
+        "description": "Delete a blog post by its ID. This action is irreversible and typically restricted to authorized users.",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/posts/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "posts", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "description": "Register a new user by providing name, email, and password. This endpoint creates a new account in the system.",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Harsh Kumar\",\n  \"email\": \"harsh@example.com\",\n  \"password\": \"123456\"\n}",
+          "options": {
+            "raw": { "language": "json" }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/signup",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "auth", "signup"]
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "description": "Authenticate a user using email and password. Returns a JWT token for accessing protected routes.",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"harsh@example.com\",\n  \"password\": \"123456\"\n}",
+          "options": {
+            "raw": { "language": "json" }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "Forgot Password",
+      "request": {
+        "method": "POST",
+        "description": "Initiate password reset by providing the user's email. A reset link/token is sent to the registered email address.",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"harsh@example.com\"\n}",
+          "options": {
+            "raw": { "language": "json" }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/forgot-password",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "auth", "forgot-password"]
+        }
+      }
+    },
+    {
+      "name": "Reset Password",
+      "request": {
+        "method": "POST",
+        "description": "Reset the user's password using a valid reset token received via email. Requires a new password in the request body.",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"password\": \"newpassword123\"\n}",
+          "options": {
+            "raw": { "language": "json" }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/reset-password/:token",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "auth", "reset-password", ":token"]
+        }
+      }
+    }
+  ]
+}
