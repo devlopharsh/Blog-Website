@@ -33,6 +33,16 @@ describe("app integration", () => {
     });
   });
 
+  it("returns health status from GET /api/health", async () => {
+    const response = await request(app).get("/api/health");
+
+    expect(response.status).toBe(200);
+    expect(response.body.success).toBe(true);
+    expect(response.body.status).toBe("ok");
+    expect(response.body.uptime).toEqual(expect.any(Number));
+    expect(response.body.timestamp).toEqual(expect.any(String));
+  });
+
   it("rejects invalid post payloads on POST /api/posts", async () => {
     const response = await request(app).post("/api/posts").send({
       title: "No",
