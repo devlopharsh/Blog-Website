@@ -68,7 +68,6 @@ exports.demoApi = async (req, res, next) => {
     res.json({
       success: true,
       message: "called from beeceptor - callout succeeded",
-      params: params | "-",
     });
   } catch (error) {
     console.log(error);
