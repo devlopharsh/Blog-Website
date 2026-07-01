@@ -1,5 +1,5 @@
-const postService = require('../services/post.service');
-const { exportToCSV } = require('../utils/csvExporter');
+const postService = require("../services/post.service");
+const { exportToCSV } = require("../utils/csvExporter");
 
 exports.createPost = async (req, res, next) => {
   try {
@@ -35,7 +35,7 @@ exports.getPosts = async (req, res, next) => {
 exports.getPost = async (req, res, next) => {
   try {
     const post = await postService.getPostById(req.params.id);
-    if (!post) throw { status: 404, message: 'Post not found' };
+    if (!post) throw { status: 404, message: "Post not found" };
 
     res.json({ success: true, data: post });
   } catch (err) {
@@ -55,9 +55,24 @@ exports.updatePost = async (req, res, next) => {
 exports.deletePost = async (req, res, next) => {
   try {
     await postService.deletePost(req.params.id);
-    res.json({ success: true, message: 'Post deleted' });
+    res.json({ success: true, message: "Post deleted" });
   } catch (err) {
     next(err);
+  }
+};
+
+exports.demoApi = async (req, res, next) => {
+  try {
+    const { params } = req.query;
+
+    res.json({
+      success: true,
+      message: "called from beeceptor - callout succeeded",
+      params: params | "-",
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
   }
 };
 
@@ -67,8 +82,8 @@ exports.exportCSV = async (req, res, next) => {
 
     const csv = exportToCSV(posts);
 
-    res.header('Content-Type', 'text/csv');
-    res.attachment('posts.csv');
+    res.header("Content-Type", "text/csv");
+    res.attachment("posts.csv");
     res.send(csv);
   } catch (err) {
     next(err);
